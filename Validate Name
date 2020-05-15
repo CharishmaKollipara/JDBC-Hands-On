@@ -1,0 +1,134 @@
+Question
+
+Validate Name
+
+Create a public functional interface Validate with  a method :
+
+public boolean validateName(String name);
+
+Create a public class ValidateUtility with the below methods :
+
+public static Validate validateEmployeeName() – The lambda expression  for the validateName  method must return true if the name is valid and return false if the name is invalid. 
+
+In this case, the name is valid if it contains alphabets and space and it should contain minimum 5 characters and maximum 20 characters.
+
+public static Validate validateProductName() – The lambda expression  for the validateName  method must return true if the name is valid and return false if the name is invalid. 
+
+In this case, the name is valid if the first character is an alphabet followed by 5 digits.
+
+Write the main method in ValidateUtility  class.
+
+             -  Get the value for employee name and product name. 
+
+             -  Invoke the validateEmployeeName method
+
+             -  Capture the object of Validate returned by the static method.
+
+             -  Invoke the validateName method for the employee name received as input  from the user.
+
+             -  Display the result as shown in sample output. 
+
+             -  Next, invoke the validateProductName method
+
+             -  Capture the object of Validate returned by the static method.
+
+             -  Invoke the validateName method for the product name received as input  from the user.
+
+             -  Display the result as shown in sample output. 
+
+Note  :  Implement all the static methods mentioned above using lambda expression.  Don’t create object for the interface using new keyword.
+
+Sample Input 1 :
+
+Pinky Rose
+
+A8546
+
+Sample Output 1 :
+
+Employee name is valid
+
+Product name is invalid
+
+
+
+Sample Input 2 :
+
+Rahul@123
+
+X82456
+
+Sample Output 1 :
+
+Employee name is invalid
+
+Product name is valid
+
+
+
+Validate.java
+
+
+public interface Validate{
+    //write the abstract method 
+    public boolean validateName(String name);
+}
+
+
+
+ValidateUtility.java
+
+import java.util.Scanner;
+public class ValidateUtility {
+
+	public static String ename, pname;
+	public static void main(String args[]) {
+
+		Scanner sc = new Scanner(System.in);
+		
+		//System.out.println("enter emp name");
+		ename = sc.nextLine();
+		//System.out.println("enter p name");
+		pname = sc.nextLine();
+		
+		
+		Validate emp=validateEmployeeName();
+		Validate pro=validateProductName();
+		
+			emp.validateName(ename);
+		 pro.validateName(pname);
+		 
+		 
+
+	}
+
+	public static Validate validateEmployeeName() {
+		Validate emp = (ename) -> {
+			if (ename.matches("[a-zA-Z][a-zA-Z ]{4,19}") ) {
+				System.out.println("Employee name is valid");
+				return true;
+			} else {
+				System.out.println("Employee name is invalid");
+				return false;
+			}
+		};
+		 
+		
+		return emp;
+		
+	}
+
+	public static Validate validateProductName() {
+	
+		 Validate pro = (name) -> {
+				if (name.matches("[a-zA-Z]{1}[0-9]{5}") ) {
+					System.out.println("Product name is valid");
+					return true;
+				} else {
+					System.out.println("Product name is invalid");
+					return false;
+				}
+			};
+		return pro;
+	}
+}
